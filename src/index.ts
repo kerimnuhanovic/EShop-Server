@@ -2,6 +2,7 @@ import { ConnectToDbUsecase } from 'src/domain/usecase/ConnectToDbUsecase';
 import { container } from 'inversify.config';
 import { TYPES } from 'types';
 import loginRouter from './routes/login';
+import signupRouter from './routes/signup';
 import express from 'express';
 const app = express();
 import path from 'path';
@@ -18,5 +19,6 @@ app.use(express.static(path.join(__dirname, 'images')));
 container.get<ConnectToDbUsecase>(TYPES.ConnectToDbUsecase).invoke(process.env.DATABASE!);
 
 app.use('/login', loginRouter);
+app.use('/signup', signupRouter);
 
 app.listen(8080);

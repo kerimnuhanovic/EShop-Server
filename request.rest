@@ -16,7 +16,7 @@ GET http://localhost:3000/test/users
 
 ###
 
-POST http://localhost:3000/signup/
+POST http://localhost:8080/signup/
 Content-Type: application/json
 
 {
@@ -37,7 +37,7 @@ POST http://localhost:8080/login/
 Content-Type: application/json
 
 {
-    "userIdentifier": "kerimnuhanovicc18@gmail.com",
+    "userIdentifier": "kerimnuhanovic18@gmail.com",
     "password": "test1234"
 }
 

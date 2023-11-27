@@ -7,6 +7,7 @@ import { LoginDao, LoginDaoImpl } from '@src/data/dao/LoginDao';
 import { LoginRepository } from '@src/domain/repository/LoginRepository';
 import { LoginRepositoryImpl } from '@src/data/repository/LoginRepositoryImpl';
 import { AuthenticateUserUserCase } from '@src/domain/usecase/AuthenticateUserUsecase';
+import { CreateTokenUsecase } from '@src/domain/usecase/CreateTokenUsecase';
 
 const container = new Container();
 container.bind<DatabaseAceessRepository>(TYPES.DatabaseAccessRepository).to(DatabaseAceessRepositoryImpl);
@@ -14,5 +15,6 @@ container.bind<ConnectToDbUsecase>(TYPES.ConnectToDbUsecase).to(ConnectToDbUseca
 container.bind<LoginDao>(TYPES.LoginDao).to(LoginDaoImpl);
 container.bind<LoginRepository>(TYPES.LoginRepository).to(LoginRepositoryImpl);
 container.bind<AuthenticateUserUserCase>(TYPES.AuthenticateUserUsecase).to(AuthenticateUserUserCase);
+container.bind<CreateTokenUsecase>(TYPES.CreateTokenUsecase).to(CreateTokenUsecase);
 
 export { container };

@@ -13,7 +13,6 @@ export class LoginRepositoryImpl implements LoginRepository {
     if (user === undefined) {
       return null;
     }
-    console.log(user);
     return userDocumentToUser(user);
   }
 }

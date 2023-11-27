@@ -4,4 +4,5 @@ export const TYPES = {
   LoginDao: Symbol('LoginDao'),
   LoginRepository: Symbol('LoginRepository'),
   AuthenticateUserUsecase: Symbol('AuthenticateUserUsecase'),
+  CreateTokenUsecase: Symbol('CreateTokenUsecase'),
 };
