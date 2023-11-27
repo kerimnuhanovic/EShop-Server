@@ -1,6 +1,22 @@
+import { ConnectToDbUsecase } from 'src/domain/usecase/ConnectToDbUsecase';
+import { container } from 'inversify.config';
+import { TYPES } from 'types';
+import loginRouter from './routes/login';
+import express from 'express';
+const app = express();
+import path from 'path';
+import cors from 'cors';
 import dotenv from 'dotenv-safe';
-dotenv.config();
 
-console.log('hello');
-console.log('heyy');
-console.log(process.env.MY_NAME);
+dotenv.config();
+app.use(express.json());
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'images')));
+
+container.get<ConnectToDbUsecase>(TYPES.ConnectToDbUsecase).invoke(process.env.DATABASE!);
+
+app.use('/login', loginRouter);
+
+app.listen(8080);

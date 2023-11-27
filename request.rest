@@ -1,0 +1,47 @@
+GET http://localhost:3000/test/posts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiS2VyaW0iLCJpYXQiOjE2ODcyODUxMzB9.o2J5-WcGmGiYczFK7VVvQXT023AoMpu_k021KOfme8M
+
+###
+
+POST http://localhost:3000/test
+Content-Type: application/json
+
+{
+    "username": "Kerim"
+}
+
+###
+
+GET http://localhost:3000/test/users
+
+###
+
+POST http://localhost:3000/signup/
+Content-Type: application/json
+
+{
+    "name": "Kerim",
+    "surname": "Nuhanovic",
+    "username": "knuhanovic",
+    "email": "kerimnuhanovic@gmail.com",
+    "password": "test1234",
+    "userType": "customer",
+    "profileImage": "kerimsProfileImage",
+    "shopCategories": "Appareal and Fashion$Cars$Home and Furniture",
+    "shopLocations": "Konjic, Luka 17$Sarajevo, Lozionicka"
+}
+
+###
+
+POST http://localhost:8080/login/
+Content-Type: application/json
+
+{
+    "userIdentifier": "kerimnuhanovicc18@gmail.com",
+    "password": "test1234"
+}
+
+###
+
+POST http://localhost:8080/login/createUser/
+

@@ -1,12 +1,11 @@
-import DatabaseAceessRepository from '@src/domain/repository/DatabaseAccessRepository';
-import dotenv from 'dotenv-safe';
+import { DatabaseAceessRepository } from '@src/domain/repository/DatabaseAccessRepository';
+import { injectable } from 'inversify';
 import mongoose from 'mongoose';
-dotenv.config();
+import 'reflect-metadata';
 
-class DatabaseAceessRepositoryImpl implements DatabaseAceessRepository {
+@injectable()
+export class DatabaseAceessRepositoryImpl implements DatabaseAceessRepository {
   connectToDb(databaseToken: string): void {
     mongoose.connect(databaseToken).then(() => console.log('Connected'));
   }
 }
-
-export default DatabaseAceessRepositoryImpl;
