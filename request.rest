@@ -20,13 +20,13 @@ POST http://localhost:8080/signup/
 Content-Type: application/json
 
 {
-    "name": "Kerim",
-    "surname": "Nuhanovic",
-    "username": "knuhanovic",
-    "email": "kerimnuhanovic@gmail.com",
+    "name": "Harun",
+    "surename": "Nuhanovic",
+    "username": "hnuhanovic",
+    "email": "harunnuhanovic@gmail.com",
     "password": "test1234",
     "userType": "customer",
-    "profileImage": "kerimsProfileImage",
+    "profileImage": "harunssProfileImage",
     "shopCategories": "Appareal and Fashion$Cars$Home and Furniture",
     "shopLocations": "Konjic, Luka 17$Sarajevo, Lozionicka"
 }

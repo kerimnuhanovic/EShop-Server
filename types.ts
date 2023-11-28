@@ -1,8 +1,9 @@
 export const TYPES = {
   DatabaseAccessRepository: Symbol('DatabaseAccessRepository'),
   ConnectToDbUsecase: Symbol('ConnectToDbUsecase'),
-  LoginDao: Symbol('LoginDao'),
-  LoginRepository: Symbol('LoginRepository'),
+  UserDao: Symbol('LoginDao'),
+  UserRepository: Symbol('UserRepository'),
   AuthenticateUserUsecase: Symbol('AuthenticateUserUsecase'),
   CreateTokenUsecase: Symbol('CreateTokenUsecase'),
+  RegisterUserUsecase: Symbol('RegisterUserUsecase'),
 };
