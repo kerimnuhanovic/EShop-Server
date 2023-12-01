@@ -7,6 +7,7 @@ export class User {
   profileImage: string;
   userType: string;
   shopCategories: string[];
+  shopLocations: string[];
   constructor(
     name: string,
     surename: string,
@@ -15,7 +16,8 @@ export class User {
     password: string,
     profileImage: string,
     userType: string,
-    shopCategories: string[]
+    shopCategories: string[],
+    shopLocations: string[]
   ) {
     this.name = name;
     this.suremame = surename;
@@ -25,5 +27,6 @@ export class User {
     this.profileImage = profileImage;
     this.userType = userType;
     this.shopCategories = shopCategories;
+    this.shopLocations = shopLocations;
   }
 }

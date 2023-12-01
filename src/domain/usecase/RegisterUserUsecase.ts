@@ -9,7 +9,7 @@ export class RegisterUserUsecase {
   @inject(TYPES.UserRepository) private userRepository!: UserRepository;
   invoke(
     name: string,
-    surename: string,
+    surname: string,
     username: string,
     email: string,
     password: string,
@@ -20,7 +20,7 @@ export class RegisterUserUsecase {
   ): Promise<Result<User>> {
     return this.userRepository.registerUser(
       name,
-      surename,
+      surname,
       username,
       email,
       password,

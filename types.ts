@@ -6,4 +6,5 @@ export const TYPES = {
   AuthenticateUserUsecase: Symbol('AuthenticateUserUsecase'),
   CreateTokenUsecase: Symbol('CreateTokenUsecase'),
   RegisterUserUsecase: Symbol('RegisterUserUsecase'),
+  StoreImageRepository: Symbol('StoreImageRepository'),
 };

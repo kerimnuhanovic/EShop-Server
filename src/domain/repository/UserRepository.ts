@@ -5,7 +5,7 @@ export interface UserRepository {
   authenticateUser(identifier: string, password: string): Promise<User | null>;
   registerUser(
     name: string,
-    surename: string,
+    surname: string,
     username: string,
     email: string,
     password: string,

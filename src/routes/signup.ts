@@ -4,13 +4,17 @@ import express from 'express';
 import { container } from 'inversify.config';
 import { TYPES } from 'types';
 const router = express.Router();
+import multer from 'multer';
+import { StoreImageRepository } from '@src/domain/repository/StoreImageRepository';
 
-router.post('/', async (req, res) => {
+const upload = multer({ storage: container.get<StoreImageRepository>(TYPES.StoreImageRepository).storage });
+
+router.post('/', upload.single('profileImage'), async (req, res) => {
   const registerUserUsecase = container.get<RegisterUserUsecase>(TYPES.RegisterUserUsecase);
   const createTokenUsecase = container.get<CreateTokenUsecase>(TYPES.CreateTokenUsecase);
   const result = await registerUserUsecase.invoke(
     req.body.name,
-    req.body.surename,
+    req.body.surname,
     req.body.username,
     req.body.email,
     req.body.password,
@@ -24,6 +28,7 @@ router.post('/', async (req, res) => {
       const token = createTokenUsecase.invoke(result.data.username, result.data.userType);
       return res.json(token);
     case 'failure':
+      console.log('USAO');
       res.sendStatus(result.statusCode);
   }
 });

@@ -23,7 +23,7 @@ export class UserRepositoryImpl implements UserRepository {
 
   async registerUser(
     name: string,
-    surename: string,
+    surname: string,
     username: string,
     email: string,
     password: string,
@@ -35,7 +35,7 @@ export class UserRepositoryImpl implements UserRepository {
     try {
       const user = await this.userDao.signupUser(
         name,
-        surename,
+        surname,
         username,
         email,
         password,

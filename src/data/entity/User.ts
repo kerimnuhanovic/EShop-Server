@@ -37,39 +37,46 @@ const UserSchema = new mongoose.Schema({
     type: [String],
     required: false,
   },
+  shopLocations: {
+    type: [String],
+    required: false,
+  },
 });
 
 export class UserDocument extends Document {
   _id: mongoose.ObjectId;
   name: string;
-  surename: string;
+  surname: string;
   username: string;
   email: string;
   password: string;
   profileImage: string;
   userType: string;
   shopCategories: string[];
+  shopLocations: string[];
   constructor(
     _id: mongoose.ObjectId,
     name: string,
-    surename: string,
+    surname: string,
     username: string,
     email: string,
     password: string,
     profileImage: string,
     userType: string,
-    shopCategories: string[]
+    shopCategories: string[],
+    shopLocations: string[]
   ) {
     super();
     this._id = _id;
     this.name = name;
-    this.surename = surename;
+    this.surname = surname;
     this.username = username;
     this.email = email;
     this.password = password;
     this.profileImage = profileImage;
     this.userType = userType;
     this.shopCategories = shopCategories;
+    this.shopLocations = shopLocations;
   }
 }
 
