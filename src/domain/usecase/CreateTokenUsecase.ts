@@ -9,9 +9,3 @@ export class CreateTokenUsecase {
     return { accessToken: jwt.sign(userData, process.env.ACCESS_TOKEN_SECRET!) };
   }
 }
-
-//const createToken = (req, res, next) => {
-//    const user = { username: req.user.username, userType: req.user.userType };
-//    req.token = { accessToken: jwt.sign(user, process.env.ACCESS_TOKEN_SECRET) };
-//    next();
-//  };
