@@ -43,5 +43,14 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/login/createUser/
+POST http://localhost:8080/product/addProduct/
+Content-Type: application/json
 
+{
+    "title": "Samsung Galaxy S21",
+    "description": "some description",
+    "category": "Appareal and Fashion",
+    "price": 2500,
+    "shop": "hnuhanovic",
+    "images": ["images"]
+}

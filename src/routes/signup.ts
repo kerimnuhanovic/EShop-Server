@@ -6,7 +6,6 @@ import { TYPES } from 'types';
 const router = express.Router();
 import multer from 'multer';
 import { StoreImageRepository } from '@src/domain/repository/StoreImageRepository';
-import { StoreImageRepositoryImpl } from '@src/data/repository/StoreImageRepositoryImpl';
 
 const storeImageRepository = container.get<StoreImageRepository>(TYPES.StoreImageRepository);
 const upload = multer({ storage: storeImageRepository.storage });

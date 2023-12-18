@@ -11,6 +11,10 @@ import { CreateTokenUsecase } from '@src/domain/usecase/CreateTokenUsecase';
 import { RegisterUserUsecase } from '@src/domain/usecase/RegisterUserUsecase';
 import { StoreImageRepository } from '@src/domain/repository/StoreImageRepository';
 import { StoreImageRepositoryImpl } from '@src/data/repository/StoreImageRepositoryImpl';
+import { ProductDao, ProductDaoImpl } from '@src/data/dao/ProductDao';
+import { ProductRepository } from '@src/domain/repository/ProductRepository';
+import { ProductRepositoryImpl } from '@src/data/repository/ProductRepositoryImpl';
+import { AddProductUsecase } from '@src/domain/usecase/AddProductUsecase';
 
 const container = new Container();
 container.bind<DatabaseAceessRepository>(TYPES.DatabaseAccessRepository).to(DatabaseAceessRepositoryImpl);
@@ -21,5 +25,8 @@ container.bind<AuthenticateUserUserCase>(TYPES.AuthenticateUserUsecase).to(Authe
 container.bind<CreateTokenUsecase>(TYPES.CreateTokenUsecase).to(CreateTokenUsecase);
 container.bind<RegisterUserUsecase>(TYPES.RegisterUserUsecase).to(RegisterUserUsecase);
 container.bind<StoreImageRepository>(TYPES.StoreImageRepository).to(StoreImageRepositoryImpl);
+container.bind<ProductDao>(TYPES.ProductDao).to(ProductDaoImpl);
+container.bind<ProductRepository>(TYPES.ProductRepository).to(ProductRepositoryImpl);
+container.bind<AddProductUsecase>(TYPES.AddProductUsecase).to(AddProductUsecase);
 
 export { container };
