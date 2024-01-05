@@ -10,7 +10,6 @@ import fs from 'fs';
 export class StoreImageRepositoryImpl implements StoreImageRepository {
   // fileName used for single image upload
   fileName: string | null = null;
-  files: string[] = [];
   singleStorage: StorageEngine = multer.diskStorage({
     destination: (req: Request, file: Express.Multer.File, cb) => {
       cb(null, 'src/images');
@@ -25,12 +24,7 @@ export class StoreImageRepositoryImpl implements StoreImageRepository {
       cb(null, 'src/images');
     },
     filename: (req: Request, file: Express.Multer.File, cb) => {
-      if (!this.files || this.files.length === 0) {
-        this.files = []
-      }
-      const filename = generateUUID(file.originalname) 
-      this.files.push(filename)
-      cb(null, filename)
+      cb(null, file.originalname)
     }
   })
   deleteImages(paths: string[]): void {

@@ -21,7 +21,6 @@ export class ProductRepositoryImpl implements ProductRepository {
     images: string[]
   ): Promise<Result<Product>> {
     try {
-      console.log("EVO ME U PRODUCT IMPL")
       const product = await this.productDao.addProduct(title, description, category, price, shop, images);
       return success(productDocumentToProduct(product));
     } catch (error) {

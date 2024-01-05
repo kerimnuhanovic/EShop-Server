@@ -14,6 +14,8 @@ router.post('/addProduct', upload.array('productImages[]'), async (req, res) => 
   const addProductusecase = container.get<AddProductUsecase>(TYPES.AddProductUsecase);
   const userTokenValidationUsecase = container.get<UserTokenValidationUsecase>(TYPES.UserTokenValidationUsecase)
   const userTokenValidationResult = userTokenValidationUsecase.invoke(req.headers["authorization"])
+  const images = req.files as Express.Multer.File[]
+  const imageFilenames = images.map(image => image.filename)
   switch (userTokenValidationResult.type) {
     case 'success': {
       const result = await addProductusecase.invoke(
@@ -22,18 +24,18 @@ router.post('/addProduct', upload.array('productImages[]'), async (req, res) => 
         req.body.category,
         req.body.price,
         userTokenValidationResult.data,
-        storeImageRepository.files
+        imageFilenames
       );
       switch (result.type) {
         case 'success':
           return res.json(result.data);
         case 'failure':
-          storeImageRepository.deleteImages(storeImageRepository.files)
+          storeImageRepository.deleteImages(imageFilenames)
           return res.sendStatus(result.statusCode);
       }
     }
     case 'failure':
-      storeImageRepository.deleteImages(storeImageRepository.files)
+      storeImageRepository.deleteImages(imageFilenames)
       return res.sendStatus(userTokenValidationResult.statusCode);
   }
   
