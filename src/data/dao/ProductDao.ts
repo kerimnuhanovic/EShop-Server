@@ -1,5 +1,6 @@
 import { injectable } from 'inversify';
 import { ProductEntity, ProductDocument } from 'src/data/entity/Product';
+import { convertStringToList } from '../util/converterUtil';
 export interface ProductDao {
   addProduct(
     title: string,
@@ -25,13 +26,14 @@ export class ProductDaoImpl implements ProductDao {
       const product = new ProductEntity({
         title: title,
         description: description,
-        category: category,
+        category: convertStringToList(category),
         price: price,
         shop: shop,
         images: images,
       });
       return await product.save();
     } catch (e) {
+      console.log("Evo me u DAO" + e)
       throw e;
     }
   }

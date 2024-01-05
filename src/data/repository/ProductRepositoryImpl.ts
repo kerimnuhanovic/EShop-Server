@@ -21,6 +21,7 @@ export class ProductRepositoryImpl implements ProductRepository {
     images: string[]
   ): Promise<Result<Product>> {
     try {
+      console.log("EVO ME U PRODUCT IMPL")
       const product = await this.productDao.addProduct(title, description, category, price, shop, images);
       return success(productDocumentToProduct(product));
     } catch (error) {
@@ -29,14 +30,5 @@ export class ProductRepositoryImpl implements ProductRepository {
       }
       return failure(serverError, 500);
     }
-
-    /*
-
-    catch (error) {
-      if (error instanceof MongoError) {
-        return handleMongoError(error);
-      }
-      return failure(serverError, 500);
-    */
   }
 }

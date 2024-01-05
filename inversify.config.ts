@@ -15,6 +15,7 @@ import { ProductDao, ProductDaoImpl } from '@src/data/dao/ProductDao';
 import { ProductRepository } from '@src/domain/repository/ProductRepository';
 import { ProductRepositoryImpl } from '@src/data/repository/ProductRepositoryImpl';
 import { AddProductUsecase } from '@src/domain/usecase/AddProductUsecase';
+import { UserTokenValidationUsecase } from '@src/domain/usecase/UserTokenValidationUsecase';
 
 const container = new Container();
 container.bind<DatabaseAceessRepository>(TYPES.DatabaseAccessRepository).to(DatabaseAceessRepositoryImpl);
@@ -28,5 +29,6 @@ container.bind<StoreImageRepository>(TYPES.StoreImageRepository).to(StoreImageRe
 container.bind<ProductDao>(TYPES.ProductDao).to(ProductDaoImpl);
 container.bind<ProductRepository>(TYPES.ProductRepository).to(ProductRepositoryImpl);
 container.bind<AddProductUsecase>(TYPES.AddProductUsecase).to(AddProductUsecase);
+container.bind<UserTokenValidationUsecase>(TYPES.UserTokenValidationUsecase).to(UserTokenValidationUsecase)
 
 export { container };

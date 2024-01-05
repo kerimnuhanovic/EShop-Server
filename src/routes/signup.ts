@@ -8,7 +8,7 @@ import multer from 'multer';
 import { StoreImageRepository } from '@src/domain/repository/StoreImageRepository';
 
 const storeImageRepository = container.get<StoreImageRepository>(TYPES.StoreImageRepository);
-const upload = multer({ storage: storeImageRepository.storage });
+const upload = multer({ storage: storeImageRepository.singleStorage });
 
 router.post('/', upload.single('profileImage'), async (req, res) => {
   const registerUserUsecase = container.get<RegisterUserUsecase>(TYPES.RegisterUserUsecase);
@@ -30,7 +30,7 @@ router.post('/', upload.single('profileImage'), async (req, res) => {
       const token = createTokenUsecase.invoke(result.data.username, result.data.userType);
       return res.json(token);
     case 'failure':
-      storeImageRepository.deleteImage('src/images/' + profileImage);
+      storeImageRepository.deleteImages([profileImage]);
       res.sendStatus(result.statusCode);
   }
 });
