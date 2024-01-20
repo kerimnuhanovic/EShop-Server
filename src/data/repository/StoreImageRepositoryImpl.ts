@@ -8,8 +8,9 @@ import fs from 'fs';
 
 @injectable()
 export class StoreImageRepositoryImpl implements StoreImageRepository {
+  // fileName used for single image upload
   fileName: string | null = null;
-  storage: StorageEngine = multer.diskStorage({
+  singleStorage: StorageEngine = multer.diskStorage({
     destination: (req: Request, file: Express.Multer.File, cb) => {
       cb(null, 'src/images');
     },
@@ -18,7 +19,17 @@ export class StoreImageRepositoryImpl implements StoreImageRepository {
       cb(null, this.fileName);
     },
   });
-  deleteImage(path: string): void {
-    fs.unlinkSync(path);
+  multiStorage: StorageEngine = multer.diskStorage({
+    destination: (req: Request, file: Express.Multer.File, cb) => {
+      cb(null, 'src/images');
+    },
+    filename: (req: Request, file: Express.Multer.File, cb) => {
+      cb(null, file.originalname)
+    }
+  })
+  deleteImages(paths: string[]): void {
+    paths.forEach((path) => {
+      fs.unlinkSync('src/images/' + path)
+    })
   }
 }

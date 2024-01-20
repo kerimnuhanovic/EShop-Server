@@ -3,6 +3,7 @@ import { container } from 'inversify.config';
 import { TYPES } from 'types';
 import loginRouter from './routes/login';
 import signupRouter from './routes/signup';
+import productRouter from './routes/product';
 import express from 'express';
 const app = express();
 import path from 'path';
@@ -20,5 +21,6 @@ container.get<ConnectToDbUsecase>(TYPES.ConnectToDbUsecase).invoke(process.env.D
 
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
+app.use('/product', productRouter);
 
 app.listen(8080);

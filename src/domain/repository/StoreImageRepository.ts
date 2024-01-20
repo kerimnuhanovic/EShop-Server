@@ -1,7 +1,8 @@
 import multer from 'multer';
 
 export interface StoreImageRepository {
-  storage: multer.StorageEngine;
+  singleStorage: multer.StorageEngine;
+  multiStorage: multer.StorageEngine;
   fileName: string | null;
-  deleteImage(path: string): void;
+  deleteImages(paths: string[]): void;
 }
