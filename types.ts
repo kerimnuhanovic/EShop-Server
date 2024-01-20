@@ -10,5 +10,7 @@ export const TYPES = {
   ProductDao: Symbol('ProductDao'),
   ProductRepository: Symbol('ProductRepository'),
   AddProductUsecase: Symbol('AddProductUsecase'),
-  UserTokenValidationUsecase: Symbol('UserTokenValidationUsecase')
+  UserTokenValidationUsecase: Symbol('UserTokenValidationUsecase'),
+  GetPopularProductsUsecase: Symbol('GetPopularProductsUsecase'),
+  GetAllProductsUsecase: Symbol('GetAllProductsUsecase')
 };

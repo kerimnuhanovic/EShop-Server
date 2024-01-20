@@ -10,4 +10,6 @@ export interface ProductRepository {
     shop: string,
     images: string[]
   ): Promise<Result<Product>>;
+  getPopularProducts(): Promise<Result<Product[]>>
+  getAllProducts(offset: number): Promise<Result<Product[]>>
 }

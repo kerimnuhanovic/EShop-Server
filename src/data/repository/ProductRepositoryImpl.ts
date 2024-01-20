@@ -30,4 +30,28 @@ export class ProductRepositoryImpl implements ProductRepository {
       return failure(serverError, 500);
     }
   }
+  async getPopularProducts(): Promise<Result<Product[]>> {
+    try {
+      const result = await this.productDao.getPopularProducts()
+      const products = result.map((product) => productDocumentToProduct(product))
+      return success(products)
+    } catch (error) {
+      if (error instanceof MongoError) {
+        return handleMongoError(error);
+      }
+      return failure(serverError, 500);
+    }
+  }
+  async getAllProducts(offset: number): Promise<Result<Product[]>> {
+    try {
+      const result = await this.productDao.getAllProducts(offset);
+      const products = result.map((product) => productDocumentToProduct(product));
+      return success(products);
+    } catch (error) {
+      if (error instanceof MongoError) {
+        return handleMongoError(error);
+      }
+      return failure(serverError, 500);
+    }
+  }
 }

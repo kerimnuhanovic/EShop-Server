@@ -5,6 +5,8 @@ import { TYPES } from 'types';
 import { UserTokenValidationUsecase } from '@src/domain/usecase/UserTokenValidationUsecase';
 import multer from 'multer';
 import { StoreImageRepository } from '@src/domain/repository/StoreImageRepository';
+import { GetPopularProductsUsecase } from '@src/domain/usecase/GetPopularProductsUsecase';
+import { GetAllProductsUsecase } from '@src/domain/usecase/GetAllProductsUsecase';
 
 const storeImageRepository = container.get<StoreImageRepository>(TYPES.StoreImageRepository);
 const upload = multer({ storage: storeImageRepository.multiStorage });
@@ -38,7 +40,30 @@ router.post('/addProduct', upload.array('productImages[]'), async (req, res) => 
       storeImageRepository.deleteImages(imageFilenames)
       return res.sendStatus(userTokenValidationResult.statusCode);
   }
-  
 });
+
+router.get("/popularProducts", async (req, res) => {
+  const getPopularProductsUsecase = container.get<GetPopularProductsUsecase>(TYPES.GetPopularProductsUsecase)
+  const result = await getPopularProductsUsecase.invoke()
+  switch (result.type) {
+    case 'success':
+      return res.json(result.data);
+    case 'failure':
+      return res.sendStatus(result.statusCode)  
+  }
+})
+
+
+router.get("/allProducts/:offset", async (req, res) => {
+  console.log("USAo")
+  const getAllProductsUsecase = container.get<GetAllProductsUsecase>(TYPES.GetAllProductsUsecase)
+  const result = await getAllProductsUsecase.invoke(parseInt(req.params.offset))
+  switch (result.type) {
+    case 'success':
+      return res.json(result.data);
+    case 'failure':
+      return res.sendStatus(result.statusCode)  
+  }
+})
 
 export default router;

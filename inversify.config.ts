@@ -16,6 +16,8 @@ import { ProductRepository } from '@src/domain/repository/ProductRepository';
 import { ProductRepositoryImpl } from '@src/data/repository/ProductRepositoryImpl';
 import { AddProductUsecase } from '@src/domain/usecase/AddProductUsecase';
 import { UserTokenValidationUsecase } from '@src/domain/usecase/UserTokenValidationUsecase';
+import { GetPopularProductsUsecase } from '@src/domain/usecase/GetPopularProductsUsecase';
+import { GetAllProductsUsecase } from '@src/domain/usecase/GetAllProductsUsecase';
 
 const container = new Container();
 container.bind<DatabaseAceessRepository>(TYPES.DatabaseAccessRepository).to(DatabaseAceessRepositoryImpl);
@@ -30,5 +32,7 @@ container.bind<ProductDao>(TYPES.ProductDao).to(ProductDaoImpl);
 container.bind<ProductRepository>(TYPES.ProductRepository).to(ProductRepositoryImpl);
 container.bind<AddProductUsecase>(TYPES.AddProductUsecase).to(AddProductUsecase);
 container.bind<UserTokenValidationUsecase>(TYPES.UserTokenValidationUsecase).to(UserTokenValidationUsecase)
+container.bind<GetPopularProductsUsecase>(TYPES.GetPopularProductsUsecase).to(GetPopularProductsUsecase)
+container.bind<GetAllProductsUsecase>(TYPES.GetAllProductsUsecase).to(GetAllProductsUsecase)
 
 export { container };

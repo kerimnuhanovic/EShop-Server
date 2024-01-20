@@ -54,3 +54,8 @@ Content-Type: application/json
     "shop": "hnuhanovic",
     "images": ["images"]
 }
+
+###
+
+GET http://localhost:8080/product/popularProducts/
+
