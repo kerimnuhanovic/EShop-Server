@@ -54,4 +54,18 @@ export class ProductRepositoryImpl implements ProductRepository {
       return failure(serverError, 500);
     }
   }
+  async getProduct(productId: string): Promise<Result<Product>> {
+    try {
+      const result = await this.productDao.getProduct(productId)
+      if (result) {
+        return success(productDocumentToProduct(result))
+      }
+      throw new Error("Product with this id doesn't exists")
+    } catch(error) {
+      if (error instanceof MongoError) {
+        return handleMongoError(error);
+      }
+      return failure(serverError, 500);
+    }
+  }
 }

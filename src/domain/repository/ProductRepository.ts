@@ -12,4 +12,5 @@ export interface ProductRepository {
   ): Promise<Result<Product>>;
   getPopularProducts(): Promise<Result<Product[]>>
   getAllProducts(offset: number): Promise<Result<Product[]>>
+  getProduct(productId: string): Promise<Result<Product>>
 }

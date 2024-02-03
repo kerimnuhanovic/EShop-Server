@@ -7,6 +7,7 @@ import multer from 'multer';
 import { StoreImageRepository } from '@src/domain/repository/StoreImageRepository';
 import { GetPopularProductsUsecase } from '@src/domain/usecase/GetPopularProductsUsecase';
 import { GetAllProductsUsecase } from '@src/domain/usecase/GetAllProductsUsecase';
+import { GetProductUsecase } from '@src/domain/usecase/GetProductsUsecase';
 
 const storeImageRepository = container.get<StoreImageRepository>(TYPES.StoreImageRepository);
 const upload = multer({ storage: storeImageRepository.multiStorage });
@@ -55,9 +56,19 @@ router.get("/popularProducts", async (req, res) => {
 
 
 router.get("/allProducts/:offset", async (req, res) => {
-  console.log("USAo")
   const getAllProductsUsecase = container.get<GetAllProductsUsecase>(TYPES.GetAllProductsUsecase)
   const result = await getAllProductsUsecase.invoke(parseInt(req.params.offset))
+  switch (result.type) {
+    case 'success':
+      return res.json(result.data);
+    case 'failure':
+      return res.sendStatus(result.statusCode)  
+  }
+})
+
+router.get("/getProduct/:id", async (req, res) => {
+  const getProductUsecase = container.get<GetProductUsecase>(TYPES.GetProductUsecase)
+  const result = await getProductUsecase.invoke(req.params.id)
   switch (result.type) {
     case 'success':
       return res.json(result.data);

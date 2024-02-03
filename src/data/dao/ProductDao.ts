@@ -12,6 +12,7 @@ export interface ProductDao {
   ): Promise<ProductDocument>;
   getPopularProducts(): Promise<ProductDocument[]>
   getAllProducts(offset: number): Promise<ProductDocument[]>
+  getProduct(productId: string): Promise<ProductDocument | null>
 }
 
 @injectable()
@@ -52,6 +53,14 @@ export class ProductDaoImpl implements ProductDao {
       // set limit to 20 when more products are added to db
       const products = await ProductEntity.find({}).skip(offset).limit(5)
       return products;
+    } catch (e) {
+      throw e;
+    }
+  }
+  async getProduct(productId: string): Promise<ProductDocument | null> {
+    try {
+      const product = await ProductEntity.findById(productId)
+      return product
     } catch (e) {
       throw e;
     }
