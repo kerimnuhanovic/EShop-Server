@@ -6,13 +6,12 @@ import { TYPES } from 'types';
 const router = express.Router();
 
 router.post("/addProductToCart", async (req, res) => {
-    console.log(req.headers["authorization"])
     const addProductToCartUsecase = container.get<AddProductToCartUsecase>(TYPES.AddProductToCartUsecase)
     const userTokenValidationUsecase = container.get<UserTokenValidationUsecase>(TYPES.UserTokenValidationUsecase)
     const userTokenValidationResult = userTokenValidationUsecase.invoke(req.headers["authorization"])
     switch (userTokenValidationResult.type) {
         case 'success': {
-          const result = await addProductToCartUsecase.invoke(userTokenValidationResult.data, req.body.productId)
+          const result = await addProductToCartUsecase.invoke(userTokenValidationResult.data.username, req.body.productId)
           switch (result.type) {
             case 'success': {
                 return res.json(result.data)    

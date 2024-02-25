@@ -19,7 +19,7 @@ router.post('/', async (req: Request<{}, {}, AuthRequest>, res: Response) => {
   if (user == null) {
     return res.status(401).json(invalidCredentials);
   }
-  const token = createTokenUsecase.invoke(user.username, user.userType);
+  const token = createTokenUsecase.invoke(user.username, user.userType, user.profileImage);
   res.json(token);
 });
 

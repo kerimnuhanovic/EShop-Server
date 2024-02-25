@@ -19,5 +19,11 @@ export const TYPES = {
   GetShopUsecase: Symbol('GetShopUsecase'),
   CartDao: Symbol('CartDao'),
   CartRepository: Symbol('CartRepository'),
-  AddProductToCartUsecase: Symbol('AddProductToCartUsecase')
+  AddProductToCartUsecase: Symbol('AddProductToCartUsecase'),
+  GetAllShopsUsecase: Symbol('GetAllShopsUsecase'),
+  GetPopularShopsUsecase: Symbol('GetPopularShopsUsecase'),
+  GetShopProductsUsecase: Symbol('GetShopProductsUsecase'),
+  GetShopReviewsUsecase: Symbol('GetShopReviewsUsecase'),
+  CalculateShopRatingUsecase: Symbol('CalculateShopRatingUsecase'),
+  AddReviewUsecase: Symbol('AddReviewUsecase')
 };

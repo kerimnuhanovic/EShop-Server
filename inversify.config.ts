@@ -27,6 +27,12 @@ import { CartDao, CartDaoImpl } from '@src/data/dao/CartDao';
 import { CartRepository } from '@src/domain/repository/CartRepository';
 import { CartRepositoryImpl } from '@src/data/repository/CartRepositoryImpl';
 import { AddProductToCartUsecase } from '@src/domain/usecase/AddProductToCartUsecase';
+import { GetAllShopsUsecase } from '@src/domain/usecase/GetAllShopsUsecase';
+import { GetPopularShopsUsecase } from '@src/domain/usecase/GetPopularShopsUsecase';
+import { GetShopProductsUsecase } from '@src/domain/usecase/GetShopProductsUsecase';
+import { GetShopReviewsUsecase } from '@src/domain/usecase/GetShopReviewsUsecase';
+import { CalculateShopRatingUsecase } from '@src/domain/usecase/CalculateShopRatingUsecase';
+import { AddReviewUsecase } from '@src/domain/usecase/AddReviewUsecase';
 
 const container = new Container();
 container.bind<DatabaseAceessRepository>(TYPES.DatabaseAccessRepository).to(DatabaseAceessRepositoryImpl);
@@ -50,5 +56,11 @@ container.bind<GetShopUsecase>(TYPES.GetShopUsecase).to(GetShopUsecase)
 container.bind<CartDao>(TYPES.CartDao).to(CartDaoImpl)
 container.bind<CartRepository>(TYPES.CartRepository).to(CartRepositoryImpl)
 container.bind<AddProductToCartUsecase>(TYPES.AddProductToCartUsecase).to(AddProductToCartUsecase)
+container.bind<GetAllShopsUsecase>(TYPES.GetAllShopsUsecase).to(GetAllShopsUsecase)
+container.bind<GetPopularShopsUsecase>(TYPES.GetPopularShopsUsecase).to(GetPopularShopsUsecase)
+container.bind<GetShopProductsUsecase>(TYPES.GetShopProductsUsecase).to(GetShopProductsUsecase)
+container.bind<GetShopReviewsUsecase>(TYPES.GetShopReviewsUsecase).to(GetShopReviewsUsecase)
+container.bind<CalculateShopRatingUsecase>(TYPES.CalculateShopRatingUsecase).to(CalculateShopRatingUsecase)
+container.bind<AddReviewUsecase>(TYPES.AddReviewUsecase).to(AddReviewUsecase)
 
 export { container };

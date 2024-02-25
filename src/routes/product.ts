@@ -26,7 +26,7 @@ router.post('/addProduct', upload.array('productImages[]'), async (req, res) => 
         req.body.description,
         req.body.category,
         req.body.price,
-        userTokenValidationResult.data,
+        userTokenValidationResult.data.username,
         imageFilenames
       );
       switch (result.type) {
