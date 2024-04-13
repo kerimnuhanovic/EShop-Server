@@ -12,5 +12,18 @@ export const TYPES = {
   AddProductUsecase: Symbol('AddProductUsecase'),
   UserTokenValidationUsecase: Symbol('UserTokenValidationUsecase'),
   GetPopularProductsUsecase: Symbol('GetPopularProductsUsecase'),
-  GetAllProductsUsecase: Symbol('GetAllProductsUsecase')
+  GetAllProductsUsecase: Symbol('GetAllProductsUsecase'),
+  GetProductUsecase: Symbol('GetProductUsecase'),
+  ShopRepository: Symbol('ShopRepository'),
+  ShopDao: Symbol('ShopDao'),
+  GetShopUsecase: Symbol('GetShopUsecase'),
+  CartDao: Symbol('CartDao'),
+  CartRepository: Symbol('CartRepository'),
+  AddProductToCartUsecase: Symbol('AddProductToCartUsecase'),
+  GetAllShopsUsecase: Symbol('GetAllShopsUsecase'),
+  GetPopularShopsUsecase: Symbol('GetPopularShopsUsecase'),
+  GetShopProductsUsecase: Symbol('GetShopProductsUsecase'),
+  GetShopReviewsUsecase: Symbol('GetShopReviewsUsecase'),
+  CalculateShopRatingUsecase: Symbol('CalculateShopRatingUsecase'),
+  AddReviewUsecase: Symbol('AddReviewUsecase')
 };

@@ -6,7 +6,7 @@ export interface UserDao {
   authenticateUser(identifier: string, password: string): Promise<UserDocument>;
   signupUser(
     name: string,
-    surename: string,
+    surname: string,
     username: string,
     email: string,
     password: string,
@@ -28,7 +28,7 @@ export class UserDaoImpl implements UserDao {
 
   async signupUser(
     name: string,
-    surename: string,
+    surname: string,
     username: string,
     email: string,
     password: string,
@@ -40,7 +40,7 @@ export class UserDaoImpl implements UserDao {
     try {
       const user = new UserEntity({
         name: name,
-        surename: surename,
+        surname: surname,
         username: username,
         email: email,
         password: password,

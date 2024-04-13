@@ -42,12 +42,26 @@ export class ProductRepositoryImpl implements ProductRepository {
       return failure(serverError, 500);
     }
   }
-  async getAllProducts(offset: number): Promise<Result<Product[]>> {
+  async getAllProducts(offset: number, searchQuery?: String | null, filteredCategories?: string[], sortBy?: string, orderBy?: string): Promise<Result<Product[]>> {
     try {
-      const result = await this.productDao.getAllProducts(offset);
+      const result = await this.productDao.getAllProducts(offset, searchQuery, filteredCategories, sortBy, orderBy);
       const products = result.map((product) => productDocumentToProduct(product));
       return success(products);
     } catch (error) {
+      if (error instanceof MongoError) {
+        return handleMongoError(error);
+      }
+      return failure(serverError, 500);
+    }
+  }
+  async getProduct(productId: string): Promise<Result<Product>> {
+    try {
+      const result = await this.productDao.getProduct(productId)
+      if (result) {
+        return success(productDocumentToProduct(result))
+      }
+      throw new Error("Product with this id doesn't exists")
+    } catch(error) {
       if (error instanceof MongoError) {
         return handleMongoError(error);
       }

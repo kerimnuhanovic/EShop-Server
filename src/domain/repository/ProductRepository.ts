@@ -11,5 +11,6 @@ export interface ProductRepository {
     images: string[]
   ): Promise<Result<Product>>;
   getPopularProducts(): Promise<Result<Product[]>>
-  getAllProducts(offset: number): Promise<Result<Product[]>>
+  getAllProducts(offset: number, searchQuery?: String | null, filteredCategories?: string[], sortBy?: string, orderBy?: string): Promise<Result<Product[]>>
+  getProduct(productId: string): Promise<Result<Product>>
 }

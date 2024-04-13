@@ -7,6 +7,8 @@ import multer from 'multer';
 import { StoreImageRepository } from '@src/domain/repository/StoreImageRepository';
 import { GetPopularProductsUsecase } from '@src/domain/usecase/GetPopularProductsUsecase';
 import { GetAllProductsUsecase } from '@src/domain/usecase/GetAllProductsUsecase';
+import { GetProductUsecase } from '@src/domain/usecase/GetProductsUsecase';
+import { formatFilterParams } from '@src/domain/util/mapUtils';
 
 const storeImageRepository = container.get<StoreImageRepository>(TYPES.StoreImageRepository);
 const upload = multer({ storage: storeImageRepository.multiStorage });
@@ -25,7 +27,7 @@ router.post('/addProduct', upload.array('productImages[]'), async (req, res) => 
         req.body.description,
         req.body.category,
         req.body.price,
-        userTokenValidationResult.data,
+        userTokenValidationResult.data.username,
         imageFilenames
       );
       switch (result.type) {
@@ -55,9 +57,26 @@ router.get("/popularProducts", async (req, res) => {
 
 
 router.get("/allProducts/:offset", async (req, res) => {
-  console.log("USAo")
   const getAllProductsUsecase = container.get<GetAllProductsUsecase>(TYPES.GetAllProductsUsecase)
-  const result = await getAllProductsUsecase.invoke(parseInt(req.params.offset))
+  const result = await getAllProductsUsecase.invoke(
+    parseInt(req.params.offset), 
+    req.query.searchQuery?.toString(), 
+    req.query.filters as string ? formatFilterParams(req.query.filters as string) : undefined,
+    req.query.sortBy as string,
+    req.query.orderBy as string
+  )
+  
+  switch (result.type) {
+    case 'success':
+      return res.json(result.data);
+    case 'failure':
+      return res.sendStatus(result.statusCode)  
+  }
+})
+
+router.get("/getProduct/:id", async (req, res) => {
+  const getProductUsecase = container.get<GetProductUsecase>(TYPES.GetProductUsecase)
+  const result = await getProductUsecase.invoke(req.params.id)
   switch (result.type) {
     case 'success':
       return res.json(result.data);
