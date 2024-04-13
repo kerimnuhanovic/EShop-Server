@@ -31,9 +31,9 @@ export class ShopRepositoryImpl implements ShopRepository {
         }
     }
 
-    async getAllShops(offset: number): Promise<Result<Shop[]>> {
+    async getAllShops(offset: number, searchQuery?: String | null, filteredCategories?: string[], sortBy?: string, orderBy?: string): Promise<Result<Shop[]>> {
       try {
-          const result = await this.shopDao.getAllShops(offset)  
+          const result = await this.shopDao.getAllShops(offset, searchQuery, filteredCategories, sortBy, orderBy)
           if (result) {
             const shops = result.map((shopDocument) => userDocumentToShop(shopDocument))
             return success(shops)

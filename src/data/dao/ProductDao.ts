@@ -1,6 +1,7 @@
 import { injectable } from 'inversify';
 import { ProductEntity, ProductDocument } from 'src/data/entity/Product';
 import { convertStringToList } from '../util/converterUtil';
+import { OrderBy } from '@src/domain/util/SortAndOrderUtils';
 export interface ProductDao {
   addProduct(
     title: string,
@@ -11,7 +12,7 @@ export interface ProductDao {
     images: string[]
   ): Promise<ProductDocument>;
   getPopularProducts(): Promise<ProductDocument[]>
-  getAllProducts(offset: number): Promise<ProductDocument[]>
+  getAllProducts(offset: number, searchQuery?: String | null, filteredCategories?: string[], sortBy?: string, orderBy?: string): Promise<ProductDocument[]>
   getProduct(productId: string): Promise<ProductDocument | null>
 }
 
@@ -48,11 +49,21 @@ export class ProductDaoImpl implements ProductDao {
       throw e;
     }
   }
-  async getAllProducts(offset: number): Promise<ProductDocument[]> {
+  async getAllProducts(offset: number, searchQuery?: String | null, filteredCategories?: string[], sortBy?: string, orderBy?: string): Promise<ProductDocument[]> {
     try {
       // set limit to 20 when more products are added to db
-      const products = await ProductEntity.find({}).skip(offset).limit(5)
-      return products;
+      const products = await ProductEntity.find(
+        {
+          $and: [
+            {title: {$regex: searchQuery ?? '', $options: "i"}},
+            filteredCategories ? {category: {
+              $elemMatch: { $in: filteredCategories }
+          }} : {}
+          ]
+          
+        }
+        ).skip(offset).limit(5).sort([[sortBy ? sortBy : "title", orderBy === OrderBy.ASC ? 1 : -1]])
+      return products;``
     } catch (e) {
       throw e;
     }

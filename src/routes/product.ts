@@ -8,6 +8,7 @@ import { StoreImageRepository } from '@src/domain/repository/StoreImageRepositor
 import { GetPopularProductsUsecase } from '@src/domain/usecase/GetPopularProductsUsecase';
 import { GetAllProductsUsecase } from '@src/domain/usecase/GetAllProductsUsecase';
 import { GetProductUsecase } from '@src/domain/usecase/GetProductsUsecase';
+import { formatFilterParams } from '@src/domain/util/mapUtils';
 
 const storeImageRepository = container.get<StoreImageRepository>(TYPES.StoreImageRepository);
 const upload = multer({ storage: storeImageRepository.multiStorage });
@@ -57,7 +58,14 @@ router.get("/popularProducts", async (req, res) => {
 
 router.get("/allProducts/:offset", async (req, res) => {
   const getAllProductsUsecase = container.get<GetAllProductsUsecase>(TYPES.GetAllProductsUsecase)
-  const result = await getAllProductsUsecase.invoke(parseInt(req.params.offset))
+  const result = await getAllProductsUsecase.invoke(
+    parseInt(req.params.offset), 
+    req.query.searchQuery?.toString(), 
+    req.query.filters as string ? formatFilterParams(req.query.filters as string) : undefined,
+    req.query.sortBy as string,
+    req.query.orderBy as string
+  )
+  
   switch (result.type) {
     case 'success':
       return res.json(result.data);

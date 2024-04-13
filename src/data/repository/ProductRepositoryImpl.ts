@@ -42,9 +42,9 @@ export class ProductRepositoryImpl implements ProductRepository {
       return failure(serverError, 500);
     }
   }
-  async getAllProducts(offset: number): Promise<Result<Product[]>> {
+  async getAllProducts(offset: number, searchQuery?: String | null, filteredCategories?: string[], sortBy?: string, orderBy?: string): Promise<Result<Product[]>> {
     try {
-      const result = await this.productDao.getAllProducts(offset);
+      const result = await this.productDao.getAllProducts(offset, searchQuery, filteredCategories, sortBy, orderBy);
       const products = result.map((product) => productDocumentToProduct(product));
       return success(products);
     } catch (error) {

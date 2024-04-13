@@ -2,11 +2,12 @@ import { injectable } from "inversify";
 import { UserDocument, UserEntity } from "../entity/User";
 import { ProductDocument, ProductEntity } from "@src/data/entity/Product";
 import { ReviewDocument, ReviewEntity } from "@src/data/entity/Review";
+import { OrderBy } from "@src/domain/util/SortAndOrderUtils";
 const { ObjectId } = require('mongoose').Types;
 
 export interface ShopDao {
     getShopById(id: string): Promise<UserDocument | null>
-    getAllShops(offset: number): Promise<UserDocument[]>
+    getAllShops(offset: number, searchQuery?: String | null, filteredCategories?: string[], sortBy?: string, orderBy?: string): Promise<UserDocument[]>
     getPopularShops(): Promise<UserDocument[]>
     getShopProducts(shopId: string): Promise<ProductDocument[]>
     getShopReviews(shopId: string): Promise<ReviewDocument[]>
@@ -29,12 +30,18 @@ export class ShopDaoImpl implements ShopDao {
         }
     } 
 
-    async getAllShops(offset: number): Promise<UserDocument[]> {
+    async getAllShops(offset: number, searchQuery?: String | null, filteredCategories?: string[], sortBy?: string, orderBy?: string): Promise<UserDocument[]> {
         try {
             // set limit to 20 when more shops are added to db
             const shops = await UserEntity.find({
-                userType: "Shop"
-            }).skip(offset).limit(5)
+                $and: [
+                    {userType: "Shop"},
+                    {username: {$regex: searchQuery ?? '', $options: "i"}},
+                    filteredCategories ? {shopCategories: {
+                        $elemMatch: { $in: filteredCategories }
+                    }} : {}
+                ]
+            }).skip(offset).limit(5).sort([[sortBy ? sortBy : "username", orderBy === OrderBy.ASC ? 1 : -1]])
             return shops;
           } catch (e) {
             throw e;

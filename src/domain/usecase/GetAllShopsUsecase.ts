@@ -7,7 +7,7 @@ import { TYPES } from "types";
 @injectable()
 export class GetAllShopsUsecase {
     @inject(TYPES.ShopRepository) private shopRepository!: ShopRepository
-    invoke(offset: number): Promise<Result<Shop[]>> {
-        return this.shopRepository.getAllShops(offset)
+    invoke(offset: number, searchQuery?: String | null, filteredCategories?: string[], sortBy?: string, orderBy?: string): Promise<Result<Shop[]>> {
+        return this.shopRepository.getAllShops(offset, searchQuery, filteredCategories, sortBy, orderBy)
     }
 }

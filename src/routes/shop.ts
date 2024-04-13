@@ -6,6 +6,7 @@ import { GetShopProductsUsecase } from '@src/domain/usecase/GetShopProductsUseca
 import { GetShopReviewsUsecase } from '@src/domain/usecase/GetShopReviewsUsecase';
 import { GetShopUsecase } from '@src/domain/usecase/GetShopUsecase';
 import { UserTokenValidationUsecase } from '@src/domain/usecase/UserTokenValidationUsecase';
+import { formatFilterParams } from '@src/domain/util/mapUtils';
 import express from 'express';
 import { container } from 'inversify.config';
 import { TYPES } from 'types';
@@ -24,7 +25,14 @@ router.get("/popularShops", async (req, res) => {
 
 router.get("/allShops/:offset", async (req, res) => {
   const getAllShopsUsecase = container.get<GetAllShopsUsecase>(TYPES.GetAllShopsUsecase)
-  const result = await getAllShopsUsecase.invoke(parseInt(req.params.offset))
+  const result = await getAllShopsUsecase.invoke(
+    parseInt(req.params.offset), 
+    req.query.searchQuery?.toString(), 
+    req.query.filters as string ? formatFilterParams(req.query.filters as string) : undefined,
+    req.query.sortBy as string,
+    req.query.orderBy as string
+  )
+
   switch (result.type) {
     case 'success':
       return res.json(result.data);

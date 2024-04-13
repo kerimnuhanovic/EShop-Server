@@ -7,7 +7,7 @@ import { Result } from "../util/Result";
 @injectable()
 export class GetAllProductsUsecase {
     @inject(TYPES.ProductRepository) private productRepository!: ProductRepository
-    invoke(offset: number): Promise<Result<Product[]>> {
-        return this.productRepository.getAllProducts(offset)
+    invoke(offset: number, searchQuery?: String | null, filteredCategories?: string[], sortBy?: string, orderBy?: string): Promise<Result<Product[]>> {
+        return this.productRepository.getAllProducts(offset, searchQuery, filteredCategories, sortBy, orderBy)
     }
 }
