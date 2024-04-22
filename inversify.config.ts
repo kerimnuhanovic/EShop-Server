@@ -33,6 +33,13 @@ import { GetShopProductsUsecase } from '@src/domain/usecase/GetShopProductsUseca
 import { GetShopReviewsUsecase } from '@src/domain/usecase/GetShopReviewsUsecase';
 import { CalculateShopRatingUsecase } from '@src/domain/usecase/CalculateShopRatingUsecase';
 import { AddReviewUsecase } from '@src/domain/usecase/AddReviewUsecase';
+import { SocketRepository } from '@src/domain/repository/SocketRepository';
+import { SocketRepositoryImpl } from '@src/data/repository/SocketRepositoryImpl';
+import { InitializeWebSocketUsecase } from '@src/domain/usecase/InitializeWebSocketUsecase';
+import { MessageDao, MessageDaoImpl } from '@src/data/dao/MessageDao';
+import { ChatRepository } from '@src/domain/repository/ChatRepository';
+import { ChatRepositoryImpl } from '@src/data/repository/ChatRepositoryImpl';
+import { GetUserConversationsUsecase } from '@src/domain/usecase/GetUserConversationsUsecase';
 
 const container = new Container();
 container.bind<DatabaseAceessRepository>(TYPES.DatabaseAccessRepository).to(DatabaseAceessRepositoryImpl);
@@ -62,5 +69,10 @@ container.bind<GetShopProductsUsecase>(TYPES.GetShopProductsUsecase).to(GetShopP
 container.bind<GetShopReviewsUsecase>(TYPES.GetShopReviewsUsecase).to(GetShopReviewsUsecase)
 container.bind<CalculateShopRatingUsecase>(TYPES.CalculateShopRatingUsecase).to(CalculateShopRatingUsecase)
 container.bind<AddReviewUsecase>(TYPES.AddReviewUsecase).to(AddReviewUsecase)
+container.bind<SocketRepository>(TYPES.SocketRepository).to(SocketRepositoryImpl)
+container.bind<InitializeWebSocketUsecase>(TYPES.InitializeWebSocketUsecase).to(InitializeWebSocketUsecase)
+container.bind<MessageDao>(TYPES.MessageDao).to(MessageDaoImpl)
+container.bind<ChatRepository>(TYPES.ChatRepository).to(ChatRepositoryImpl)
+container.bind<GetUserConversationsUsecase>(TYPES.GetUserConversationsUsecase).to(GetUserConversationsUsecase)
 
 export { container };

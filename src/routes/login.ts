@@ -12,6 +12,10 @@ interface AuthRequest {
   password: string;
 }
 
+router.get("/test", (req, res) => {
+  res.json({test: "Kerim"})
+})
+
 router.post('/', async (req: Request<{}, {}, AuthRequest>, res: Response) => {
   const authenticateUserUsecase = container.get<AuthenticateUserUserCase>(TYPES.AuthenticateUserUsecase);
   const createTokenUsecase = container.get<CreateTokenUsecase>(TYPES.CreateTokenUsecase);
