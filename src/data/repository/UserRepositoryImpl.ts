@@ -3,12 +3,13 @@ import { UserRepository } from '@src/domain/repository/UserRepository';
 import { inject, injectable } from 'inversify';
 import { TYPES } from 'types';
 import { UserDao } from '@src/data/dao/UserDao';
-import { userDocumentToUser } from '../mapper/UserMapper';
+import { userDocumentToUser, userDocumentToUserResponse } from '../mapper/UserMapper';
 import mongoose, { Error as MongooseError } from 'mongoose';
 import { MongoError } from 'mongodb';
 import { Result, failure, success } from '@src/domain/util/Result';
 import { handleMongoError } from '../util/errorHandlingUtil';
 import { serverError } from '@src/strings/strings';
+import { UserResponse } from '@src/domain/model/UserResponse';
 
 @injectable()
 export class UserRepositoryImpl implements UserRepository {

@@ -8,14 +8,21 @@ import { MongoError } from 'mongodb';
 import { notFound, serverError } from '@src/strings/strings';
 import { messagesToConversationMapper } from "@src/data/mapper/ConversationMapper";
 import { Conversation } from "@src/domain/model/Conversation";
+import { UserDao } from "@src/data/dao/UserDao";
 
 @injectable()
 export class ChatRepositoryImpl implements ChatRepository {
     @inject(TYPES.MessageDao) private messageDao!: MessageDao
+    @inject(TYPES.UserDao) private userDao!: UserDao
     async getUserConversations(user: string): Promise<Result<Conversation[]>> {
         try {
-            const messages = await this.messageDao.getUserConversations(user)
-            return success(messagesToConversationMapper(messages, user));
+            const messages = await this.messageDao.getUserConversations(user);
+
+            const chatParners = [...new Set(messages.map(message => message.sentBy === user ? message.receivedBy : message.sentBy))];
+
+            const chatParnersInfo = await this.userDao.getUsersInformation(chatParners);
+
+            return success(messagesToConversationMapper(messages, user, chatParnersInfo));
         } catch (error) {
             if (error instanceof MongoError) {
                 return handleMongoError(error);

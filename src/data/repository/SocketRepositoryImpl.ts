@@ -57,10 +57,10 @@ export class SocketRepositoryImpl implements SocketRepository {
                             )
                             
                             if (receiverSocket) {
-                                socket.to(receiverSocket).emit(SocketEvent.RECEIVE_MESSAGE, messageDocumentToMessageResponse(result, false))
+                                socket.to(receiverSocket).emit(SocketEvent.RECEIVE_MESSAGE, messageDocumentToMessageResponse(result, true))
                             }
                             if (senderSocket) {
-                                socket.emit(SocketEvent.RECEIVE_MESSAGE, messageDocumentToMessageResponse(result, true))
+                                socket.emit(SocketEvent.RECEIVE_MESSAGE, messageDocumentToMessageResponse(result, false))
                             }
                         } catch {
                             // emit event that will indicate something went wrong

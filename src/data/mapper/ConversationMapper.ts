@@ -1,9 +1,10 @@
 import { MessageDocument } from "@src/data/entity/Message";
+import { UserDocument } from "@src/data/entity/User";
 import { messageDocumentToMessageResponse } from "@src/data/mapper/MessageResponseMapper";
 import { Conversation } from "@src/domain/model/Conversation";
 import { MessageResponse } from "@src/domain/model/MessageResponse";
 
-export const messagesToConversationMapper = (messages: MessageDocument[], user: string): Conversation[] => {
+export const messagesToConversationMapper = (messages: MessageDocument[], user: string, chatParnersInfo: UserDocument[]): Conversation[] => {
     const conversations = new Map<string, MessageResponse[]>()
     messages.map((message: MessageDocument) => {
         const isUserReceiver = message.receivedBy === user;
@@ -24,6 +25,7 @@ export const messagesToConversationMapper = (messages: MessageDocument[], user: 
         }
         result.push({
             chatPartner: key,
+            chatPartnerProfileImage: chatParnersInfo.find((chatPartner) => chatPartner.username === key)!.profileImage,
             messages: conversations.get(key)!
         })
     }
