@@ -23,5 +23,18 @@ export class CartRepositoryImpl implements CartRepository {
             return failure(serverError, 500);    
         }
     }
+
+    async getCartItems(customerId: string): Promise<Result<CartItem[]>> {
+        try {
+            const cartDocuments = await this.cartDao.getCartItems(customerId);
+            const cartItems = cartDocuments.map((cartDocument) => cartDocumentToCartItem(cartDocument));
+            return success(cartItems);
+        } catch (error) {
+            if (error instanceof MongoError) {
+                return handleMongoError(error);
+            }
+            return failure(serverError, 500); 
+        }
+    }
     
 }

@@ -15,6 +15,7 @@ export interface UserDao {
     shopCategories: string,
     shopLocations: string
   ): Promise<UserDocument>;
+  getUsersInformation(identifiers: string[]): Promise<UserDocument[]>;
 }
 
 @injectable()
@@ -53,5 +54,13 @@ export class UserDaoImpl implements UserDao {
     } catch (e) {
       throw e;
     }
+  }
+
+  async getUsersInformation(identifiers: string[]): Promise<UserDocument[]> {
+    const users = await UserEntity.find({
+      username: { $in: identifiers }
+    })
+    
+    return users as UserDocument[];
   }
 }

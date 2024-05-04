@@ -25,5 +25,12 @@ export const TYPES = {
   GetShopProductsUsecase: Symbol('GetShopProductsUsecase'),
   GetShopReviewsUsecase: Symbol('GetShopReviewsUsecase'),
   CalculateShopRatingUsecase: Symbol('CalculateShopRatingUsecase'),
-  AddReviewUsecase: Symbol('AddReviewUsecase')
+  AddReviewUsecase: Symbol('AddReviewUsecase'),
+  SocketRepository: Symbol('SocketRepository'),
+  InitializeWebSocketUsecase: Symbol('InitializeWebSocketUsecase'),
+  MessageDao: Symbol('MessageDao'),
+  ChatRepository: Symbol('ChatRepository'),
+  GetUserConversationsUsecase: Symbol('GetUserConversationsUsecase'),
+  UpdateUserConversationUsecase: Symbol('UpdateUserConversationUsecase'),
+  GetCartItemsUsecase: Symbol('GetCartItemsUsecase')
 };

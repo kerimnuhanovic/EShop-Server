@@ -2,6 +2,7 @@ import { injectable } from 'inversify';
 import { ProductEntity, ProductDocument } from 'src/data/entity/Product';
 import { convertStringToList } from '../util/converterUtil';
 import { OrderBy } from '@src/domain/util/SortAndOrderUtils';
+
 export interface ProductDao {
   addProduct(
     title: string,
