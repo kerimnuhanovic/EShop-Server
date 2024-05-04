@@ -40,6 +40,8 @@ import { MessageDao, MessageDaoImpl } from '@src/data/dao/MessageDao';
 import { ChatRepository } from '@src/domain/repository/ChatRepository';
 import { ChatRepositoryImpl } from '@src/data/repository/ChatRepositoryImpl';
 import { GetUserConversationsUsecase } from '@src/domain/usecase/GetUserConversationsUsecase';
+import { UpdateUserConversationUsecase } from '@src/domain/usecase/UpdateUserConversationUsecase';
+import { GetCartItemsUsecase } from '@src/domain/usecase/GetCartItemsUsecase';
 
 const container = new Container();
 container.bind<DatabaseAceessRepository>(TYPES.DatabaseAccessRepository).to(DatabaseAceessRepositoryImpl);
@@ -74,5 +76,7 @@ container.bind<InitializeWebSocketUsecase>(TYPES.InitializeWebSocketUsecase).to(
 container.bind<MessageDao>(TYPES.MessageDao).to(MessageDaoImpl)
 container.bind<ChatRepository>(TYPES.ChatRepository).to(ChatRepositoryImpl)
 container.bind<GetUserConversationsUsecase>(TYPES.GetUserConversationsUsecase).to(GetUserConversationsUsecase)
+container.bind<UpdateUserConversationUsecase>(TYPES.UpdateUserConversationUsecase).to(UpdateUserConversationUsecase)
+container.bind<GetCartItemsUsecase>(TYPES.GetCartItemsUsecase).to(GetCartItemsUsecase)
 
 export { container };

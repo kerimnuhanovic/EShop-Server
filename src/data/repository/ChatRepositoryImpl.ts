@@ -30,4 +30,20 @@ export class ChatRepositoryImpl implements ChatRepository {
             return failure(serverError, 500);
         }
     }
+
+    async updateUserConversation(user: string, chatParner: string): Promise<Result<Conversation>> {
+        try {
+            const messages = await this.messageDao.updateUserConversation(user, chatParner);
+
+            const chatPartnerInfo = await this.userDao.getUsersInformation([chatParner]);
+
+            return success(messagesToConversationMapper(messages, user, chatPartnerInfo)[0])
+        } catch (error) {
+            if (error instanceof MongoError) {
+                return handleMongoError(error);
+            }
+            return failure(serverError, 500);
+        }
+    }
+
 }

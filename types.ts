@@ -30,5 +30,7 @@ export const TYPES = {
   InitializeWebSocketUsecase: Symbol('InitializeWebSocketUsecase'),
   MessageDao: Symbol('MessageDao'),
   ChatRepository: Symbol('ChatRepository'),
-  GetUserConversationsUsecase: Symbol('GetUserConversationsUsecase')
+  GetUserConversationsUsecase: Symbol('GetUserConversationsUsecase'),
+  UpdateUserConversationUsecase: Symbol('UpdateUserConversationUsecase'),
+  GetCartItemsUsecase: Symbol('GetCartItemsUsecase')
 };
