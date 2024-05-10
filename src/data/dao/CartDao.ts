@@ -5,6 +5,7 @@ import { injectable } from "inversify";
 export interface CartDao {
     addProductToCart(customerId: string, productId: string): Promise<CartDocument>;
     getCartItems(customerId: string): Promise<ProductDocument[]>;
+    deleteAllCartItems(customerId: string): Promise<number>;
 }
 
 @injectable()
@@ -26,5 +27,13 @@ export class CartDaoImpl implements CartDao {
             _id: {$in: productsIds}
         })
         return products;
+    }
+
+    async deleteAllCartItems(customerId: string): Promise<number> {
+        const numberOfDeletedItems = await CartEntity.deleteMany({
+          customerId: customerId  
+        })
+
+        return numberOfDeletedItems.deletedCount
     }
 }

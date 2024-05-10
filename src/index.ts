@@ -7,6 +7,7 @@ import productRouter from './routes/product';
 import shopRouter from './routes/shop'
 import cartRouter from './routes/cart'
 import chatRouter from './routes/chat'
+import orderRouter from './routes/order'
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
@@ -34,5 +35,6 @@ app.use('/product', productRouter);
 app.use('/shop', shopRouter);
 app.use('/cart', cartRouter);
 app.use('/chat', chatRouter);
+app.use('/order', orderRouter);
 
 server.listen(8080);
