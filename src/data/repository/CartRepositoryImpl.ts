@@ -38,5 +38,17 @@ export class CartRepositoryImpl implements CartRepository {
             return failure(serverError, 500); 
         }
     }
+
+    async deleteItem(customerId: string, productId: string): Promise<Result<number>> {
+        try {
+            const result = await this.cartDao.deleteItem(customerId, productId);
+            return success(result);
+        } catch (error) {
+            if (error instanceof MongoError) {
+                return handleMongoError(error);
+            }
+            return failure(serverError, 500); 
+        }
+    }
     
 }

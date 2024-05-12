@@ -35,5 +35,6 @@ export const TYPES = {
   GetCartItemsUsecase: Symbol('GetCartItemsUsecase'),
   OrderDao: Symbol('OrderDao'),
   OrderRepository: Symbol('OrderRepository'),
-  AddOrderUsecase: Symbol('AddOrderUsecase')
+  AddOrderUsecase: Symbol('AddOrderUsecase'),
+  DeleteCartItemUsecase: Symbol('DeleteCartItemUsecase')
 };

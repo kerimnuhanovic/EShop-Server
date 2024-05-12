@@ -6,6 +6,7 @@ export interface CartDao {
     addProductToCart(customerId: string, productId: string): Promise<CartDocument>;
     getCartItems(customerId: string): Promise<ProductDocument[]>;
     deleteAllCartItems(customerId: string): Promise<number>;
+    deleteItem(customerId: string, productId: string): Promise<number>;
 }
 
 @injectable()
@@ -35,5 +36,13 @@ export class CartDaoImpl implements CartDao {
         })
 
         return numberOfDeletedItems.deletedCount
+    }
+
+    async deleteItem(customerId: string, productId: string): Promise<number> {
+        const result = await CartEntity.deleteOne({
+            productId: productId,
+            customerId: customerId
+        })
+        return result.deletedCount
     }
 }
