@@ -1,14 +1,12 @@
-import { CartItem } from "@src/domain/model/CartItem";
-import { Product } from "@src/domain/model/Product";
 import { CartRepository } from "@src/domain/repository/CartRepository";
 import { Result } from "@src/domain/util/Result";
 import { inject, injectable } from "inversify";
 import { TYPES } from "types";
 
 @injectable()
-export class GetCartItemsUsecase {
+export class DeleteCartItemUsecase {
     @inject(TYPES.CartRepository) private cartRepository!: CartRepository
-    invoke(customerId: string): Promise<Result<Product[]>> {
-        return this.cartRepository.getCartItems(customerId);
+    invoke(customerId: string, productId: string): Promise<Result<number>> {
+        return this.cartRepository.deleteItem(customerId, productId);
     }
 }

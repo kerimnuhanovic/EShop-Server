@@ -42,6 +42,11 @@ import { ChatRepositoryImpl } from '@src/data/repository/ChatRepositoryImpl';
 import { GetUserConversationsUsecase } from '@src/domain/usecase/GetUserConversationsUsecase';
 import { UpdateUserConversationUsecase } from '@src/domain/usecase/UpdateUserConversationUsecase';
 import { GetCartItemsUsecase } from '@src/domain/usecase/GetCartItemsUsecase';
+import { OrderDao, OrderDaoImpl } from '@src/data/dao/OrderDao';
+import { OrderRepositoryImpl } from '@src/data/repository/OrderRepositoryImpl';
+import { OrderRepository } from '@src/domain/repository/OrderRepository';
+import { AddOrderUsecase } from '@src/domain/usecase/AddOrderUsecase';
+import { DeleteCartItemUsecase } from '@src/domain/usecase/DeleteCartItemUsecase';
 
 const container = new Container();
 container.bind<DatabaseAceessRepository>(TYPES.DatabaseAccessRepository).to(DatabaseAceessRepositoryImpl);
@@ -78,5 +83,9 @@ container.bind<ChatRepository>(TYPES.ChatRepository).to(ChatRepositoryImpl)
 container.bind<GetUserConversationsUsecase>(TYPES.GetUserConversationsUsecase).to(GetUserConversationsUsecase)
 container.bind<UpdateUserConversationUsecase>(TYPES.UpdateUserConversationUsecase).to(UpdateUserConversationUsecase)
 container.bind<GetCartItemsUsecase>(TYPES.GetCartItemsUsecase).to(GetCartItemsUsecase)
+container.bind<OrderDao>(TYPES.OrderDao).to(OrderDaoImpl)
+container.bind<OrderRepository>(TYPES.OrderRepository).to(OrderRepositoryImpl)
+container.bind<AddOrderUsecase>(TYPES.AddOrderUsecase).to(AddOrderUsecase)
+container.bind<DeleteCartItemUsecase>(TYPES.DeleteCartItemUsecase).to(DeleteCartItemUsecase)
 
 export { container };

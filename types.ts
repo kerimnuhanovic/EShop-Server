@@ -32,5 +32,9 @@ export const TYPES = {
   ChatRepository: Symbol('ChatRepository'),
   GetUserConversationsUsecase: Symbol('GetUserConversationsUsecase'),
   UpdateUserConversationUsecase: Symbol('UpdateUserConversationUsecase'),
-  GetCartItemsUsecase: Symbol('GetCartItemsUsecase')
+  GetCartItemsUsecase: Symbol('GetCartItemsUsecase'),
+  OrderDao: Symbol('OrderDao'),
+  OrderRepository: Symbol('OrderRepository'),
+  AddOrderUsecase: Symbol('AddOrderUsecase'),
+  DeleteCartItemUsecase: Symbol('DeleteCartItemUsecase')
 };

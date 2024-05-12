@@ -1,9 +1,12 @@
 import { CartDocument, CartEntity } from "@src/data/entity/Cart";
+import { ProductDocument, ProductEntity } from "@src/data/entity/Product";
 import { injectable } from "inversify";
 
 export interface CartDao {
     addProductToCart(customerId: string, productId: string): Promise<CartDocument>;
-    getCartItems(customerId: string): Promise<CartDocument[]>;
+    getCartItems(customerId: string): Promise<ProductDocument[]>;
+    deleteAllCartItems(customerId: string): Promise<number>;
+    deleteItem(customerId: string, productId: string): Promise<number>;
 }
 
 @injectable()
@@ -16,10 +19,30 @@ export class CartDaoImpl implements CartDao {
         return await cartDocument.save()
     }
 
-    async getCartItems(customerId: string): Promise<CartDocument[]> {
+    async getCartItems(customerId: string): Promise<ProductDocument[]> {
         const cartItems = await CartEntity.find({
             customerId: customerId
         })
-        return cartItems;
+        const productsIds = cartItems.map((item) => item.productId)
+        const products = await ProductEntity.find({
+            _id: {$in: productsIds}
+        })
+        return products;
+    }
+
+    async deleteAllCartItems(customerId: string): Promise<number> {
+        const numberOfDeletedItems = await CartEntity.deleteMany({
+          customerId: customerId  
+        })
+
+        return numberOfDeletedItems.deletedCount
+    }
+
+    async deleteItem(customerId: string, productId: string): Promise<number> {
+        const result = await CartEntity.deleteOne({
+            productId: productId,
+            customerId: customerId
+        })
+        return result.deletedCount
     }
 }

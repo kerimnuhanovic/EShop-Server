@@ -8,6 +8,8 @@ import { inject, injectable } from "inversify";
 import { TYPES } from "types";
 import { MongoError } from 'mongodb';
 import { serverError } from '@src/strings/strings';
+import { productDocumentToProduct } from "@src/data/mapper/ProductMapper";
+import { Product } from "@src/domain/model/Product";
 
 @injectable()
 export class CartRepositoryImpl implements CartRepository {
@@ -24,11 +26,23 @@ export class CartRepositoryImpl implements CartRepository {
         }
     }
 
-    async getCartItems(customerId: string): Promise<Result<CartItem[]>> {
+    async getCartItems(customerId: string): Promise<Result<Product[]>> {
         try {
-            const cartDocuments = await this.cartDao.getCartItems(customerId);
-            const cartItems = cartDocuments.map((cartDocument) => cartDocumentToCartItem(cartDocument));
-            return success(cartItems);
+            const productItems = await this.cartDao.getCartItems(customerId);
+            const products = productItems.map((productItem) => productDocumentToProduct(productItem));
+            return success(products);
+        } catch (error) {
+            if (error instanceof MongoError) {
+                return handleMongoError(error);
+            }
+            return failure(serverError, 500); 
+        }
+    }
+
+    async deleteItem(customerId: string, productId: string): Promise<Result<number>> {
+        try {
+            const result = await this.cartDao.deleteItem(customerId, productId);
+            return success(result);
         } catch (error) {
             if (error instanceof MongoError) {
                 return handleMongoError(error);
