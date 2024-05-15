@@ -8,7 +8,8 @@ export const orderDocumentToOrder = (orderDocument: OrderDocument): Order => {
         orderDetails: orderDocument.orderDetails.map((orderDetails) => ({
             shop: orderDetails.shop,
             items: orderDetails.items,
-            status: orderDetails.status
+            status: orderDetails.status,
+            id: orderDetails._id
 
         })),
         dateCreated: new Date(orderDocument.dateCreated.toString())

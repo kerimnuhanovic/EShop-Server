@@ -4,6 +4,7 @@ import { injectable } from "inversify";
 
 export interface OrderDao {
     addOrder(customer: string, orderDetails: OrderDetails[]): Promise<OrderDocument>;
+    listCustomerOrders(customer: string): Promise<OrderDocument[]>;
 }
 
 @injectable()
@@ -15,4 +16,12 @@ export class OrderDaoImpl implements OrderDao {
         })
         return await order.save()
     } 
+    
+    async listCustomerOrders(customer: string): Promise<OrderDocument[]> {
+        const orders = await OrderEntity.find({
+            customer: customer
+        }).sort([['dateCreated', -1]])
+
+        return orders
+    }
 }
