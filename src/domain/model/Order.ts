@@ -8,7 +8,7 @@ export interface OrderDetails {
     shop: string;
     items: string[];
     status: string;
-    id: string
+    id?: string
 }
 
 export interface Order {

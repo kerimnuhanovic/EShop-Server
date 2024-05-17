@@ -4,7 +4,7 @@ export interface OrderInfo {
     shop: string;
     items: Product[];
     status: string;
-    id: string
+    id?: string
 }
 
 export interface DetailedOrder {
