@@ -47,6 +47,7 @@ import { OrderRepositoryImpl } from '@src/data/repository/OrderRepositoryImpl';
 import { OrderRepository } from '@src/domain/repository/OrderRepository';
 import { AddOrderUsecase } from '@src/domain/usecase/AddOrderUsecase';
 import { DeleteCartItemUsecase } from '@src/domain/usecase/DeleteCartItemUsecase';
+import { ListCustomerOrdersUsecase } from '@src/domain/usecase/ListCustomerOrdersUsecase';
 
 const container = new Container();
 container.bind<DatabaseAceessRepository>(TYPES.DatabaseAccessRepository).to(DatabaseAceessRepositoryImpl);
@@ -87,5 +88,6 @@ container.bind<OrderDao>(TYPES.OrderDao).to(OrderDaoImpl)
 container.bind<OrderRepository>(TYPES.OrderRepository).to(OrderRepositoryImpl)
 container.bind<AddOrderUsecase>(TYPES.AddOrderUsecase).to(AddOrderUsecase)
 container.bind<DeleteCartItemUsecase>(TYPES.DeleteCartItemUsecase).to(DeleteCartItemUsecase)
+container.bind<ListCustomerOrdersUsecase>(TYPES.ListCustomerOrdersUsecase).to(ListCustomerOrdersUsecase)
 
 export { container };

@@ -35,7 +35,8 @@ export class OrderDocument extends Document {
     orderDetails: {
         shop: string;
         items: string[];
-        status: string
+        status: string;
+        _id: string;
     }[];
     dateCreated: mongoose.Date;
     constructor(
@@ -44,7 +45,8 @@ export class OrderDocument extends Document {
       orderDetails: {
         shop: string;
         items: string[];
-        status: string
+        status: string;
+        _id: string;
       }[],
       dateCreated: mongoose.Date
     ) {

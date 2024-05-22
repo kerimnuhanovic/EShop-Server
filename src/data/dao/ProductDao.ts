@@ -12,9 +12,10 @@ export interface ProductDao {
     shop: string,
     images: string[]
   ): Promise<ProductDocument>;
-  getPopularProducts(): Promise<ProductDocument[]>
-  getAllProducts(offset: number, searchQuery?: String | null, filteredCategories?: string[], sortBy?: string, orderBy?: string): Promise<ProductDocument[]>
-  getProduct(productId: string): Promise<ProductDocument | null>
+  getPopularProducts(): Promise<ProductDocument[]>;
+  getAllProducts(offset: number, searchQuery?: String | null, filteredCategories?: string[], sortBy?: string, orderBy?: string): Promise<ProductDocument[]>;
+  getProduct(productId: string): Promise<ProductDocument | null>;
+  listProducts(products: string[]): Promise<ProductDocument[]>;
 }
 
 @injectable()
@@ -77,4 +78,13 @@ export class ProductDaoImpl implements ProductDao {
       throw e;
     }
   }
+
+  async listProducts(products: string[]): Promise<ProductDocument[]> {
+    const productDocuments = await ProductEntity.find({
+      _id: {$in: products}
+    })
+    
+    return productDocuments
+  }
+
 }

@@ -7,7 +7,8 @@ export enum OrderStatus {
 export interface OrderDetails {
     shop: string;
     items: string[];
-    status: string
+    status: string;
+    id?: string
 }
 
 export interface Order {
