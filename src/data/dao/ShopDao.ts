@@ -73,7 +73,7 @@ export class ShopDaoImpl implements ShopDao {
         try {
             const shopReviews = ReviewEntity.find({
                 shopId: shopId
-            })
+            }).sort([["dateAdded", -1]])
             return shopReviews
         } catch (e) {
             throw e;
