@@ -43,5 +43,11 @@ export const TYPES = {
   AddFavouriteProductUsecase: Symbol('AddFavouriteProductUsecase'),
   ListFavouriteProductsUsecase: Symbol('ListFavouriteProductsUsecase'),
   DeleteFavouriteProductUsecase: Symbol('DeleteFavouriteProductUsecase'),
-  CheckIsProductFavouriteUsecase: Symbol('CheckIsProductFavouriteUsecase')
+  CheckIsProductFavouriteUsecase: Symbol('CheckIsProductFavouriteUsecase'),
+  FavouriteShopDao: Symbol('FavouriteShopDao'),
+  FavouriteShopRepository: Symbol('FavouriteShopRepository'),
+  AddFavouriteShopUsecase: Symbol('AddFavouriteShopUsecase'),
+  ListFavouriteShopsUsecase: Symbol('ListFavouriteShopsUsecase'),
+  DeleteFavouriteShopUsecase: Symbol('DeleteFavouriteShopUsecase'),
+  CheckIsShopFavouriteUsecase: Symbol('CheckIsShopFavouriteUsecase')
 };
