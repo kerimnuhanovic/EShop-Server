@@ -48,6 +48,20 @@ import { OrderRepository } from '@src/domain/repository/OrderRepository';
 import { AddOrderUsecase } from '@src/domain/usecase/AddOrderUsecase';
 import { DeleteCartItemUsecase } from '@src/domain/usecase/DeleteCartItemUsecase';
 import { ListCustomerOrdersUsecase } from '@src/domain/usecase/ListCustomerOrdersUsecase';
+import { FavouriteProductDao, FavouriteProductDaoImpl } from '@src/data/dao/FavouriteProductDao';
+import { FavouriteProductRepository } from '@src/domain/repository/FavouriteProductRepository';
+import { FavouriteProductRepositoryImpl } from '@src/data/repository/FavouriteProductRepositoryImpl';
+import { AddFavouriteProductUsecase } from '@src/domain/usecase/AddFavouriteProductUsecase';
+import { ListFavouriteProductsUsecase } from '@src/domain/usecase/ListFavouriteProductsUsecase';
+import { DeleteFavouriteProductUsecase } from '@src/domain/usecase/DeleteFavouriteProductUsecase';
+import { CheckIsProductFavouriteUsecase } from '@src/domain/usecase/CheckIsProductFavouriteUsecase';
+import { FavouriteShopDao, FavouriteShopDaoImpl } from '@src/data/dao/FavouriteShopDao';
+import { FavouriteShopRepository } from '@src/domain/repository/FavouriteShopRepository';
+import { FavouriteShopRepositoryImpl } from '@src/data/repository/FavouriteShopRepositoryImpl';
+import { AddFavouriteShopUsecase } from '@src/domain/usecase/AddFavouriteShopUsecase';
+import { ListFavouriteShopsUsecase } from '@src/domain/usecase/ListFavouriteShopsUsecase';
+import { DeleteFavouriteShopUsecase } from '@src/domain/usecase/DeleteFavouriteShopUsecase';
+import { CheckIsShopFavouriteUsecase } from '@src/domain/usecase/CheckIsShopFavouriteUsecase';
 
 const container = new Container();
 container.bind<DatabaseAceessRepository>(TYPES.DatabaseAccessRepository).to(DatabaseAceessRepositoryImpl);
@@ -89,5 +103,17 @@ container.bind<OrderRepository>(TYPES.OrderRepository).to(OrderRepositoryImpl)
 container.bind<AddOrderUsecase>(TYPES.AddOrderUsecase).to(AddOrderUsecase)
 container.bind<DeleteCartItemUsecase>(TYPES.DeleteCartItemUsecase).to(DeleteCartItemUsecase)
 container.bind<ListCustomerOrdersUsecase>(TYPES.ListCustomerOrdersUsecase).to(ListCustomerOrdersUsecase)
+container.bind<FavouriteProductDao>(TYPES.FavouriteProductDao).to(FavouriteProductDaoImpl)
+container.bind<FavouriteProductRepository>(TYPES.FavouriteProductRepository).to(FavouriteProductRepositoryImpl)
+container.bind<AddFavouriteProductUsecase>(TYPES.AddFavouriteProductUsecase).to(AddFavouriteProductUsecase)
+container.bind<ListFavouriteProductsUsecase>(TYPES.ListFavouriteProductsUsecase).to(ListFavouriteProductsUsecase)
+container.bind<DeleteFavouriteProductUsecase>(TYPES.DeleteFavouriteProductUsecase).to(DeleteFavouriteProductUsecase)
+container.bind<CheckIsProductFavouriteUsecase>(TYPES.CheckIsProductFavouriteUsecase).to(CheckIsProductFavouriteUsecase)
+container.bind<FavouriteShopDao>(TYPES.FavouriteShopDao).to(FavouriteShopDaoImpl)
+container.bind<FavouriteShopRepository>(TYPES.FavouriteShopRepository).to(FavouriteShopRepositoryImpl)
+container.bind<AddFavouriteShopUsecase>(TYPES.AddFavouriteShopUsecase).to(AddFavouriteShopUsecase)
+container.bind<ListFavouriteShopsUsecase>(TYPES.ListFavouriteShopsUsecase).to(ListFavouriteShopsUsecase)
+container.bind<DeleteFavouriteShopUsecase>(TYPES.DeleteFavouriteShopUsecase).to(DeleteFavouriteShopUsecase)
+container.bind<CheckIsShopFavouriteUsecase>(TYPES.CheckIsShopFavouriteUsecase).to(CheckIsShopFavouriteUsecase)
 
 export { container };

@@ -37,5 +37,17 @@ export const TYPES = {
   OrderRepository: Symbol('OrderRepository'),
   AddOrderUsecase: Symbol('AddOrderUsecase'),
   DeleteCartItemUsecase: Symbol('DeleteCartItemUsecase'),
-  ListCustomerOrdersUsecase: Symbol('ListCustomerOrdersUsecase')
+  ListCustomerOrdersUsecase: Symbol('ListCustomerOrdersUsecase'),
+  FavouriteProductDao: Symbol('FavouriteProductDao'),
+  FavouriteProductRepository: Symbol('FavouriteProductRepository'),
+  AddFavouriteProductUsecase: Symbol('AddFavouriteProductUsecase'),
+  ListFavouriteProductsUsecase: Symbol('ListFavouriteProductsUsecase'),
+  DeleteFavouriteProductUsecase: Symbol('DeleteFavouriteProductUsecase'),
+  CheckIsProductFavouriteUsecase: Symbol('CheckIsProductFavouriteUsecase'),
+  FavouriteShopDao: Symbol('FavouriteShopDao'),
+  FavouriteShopRepository: Symbol('FavouriteShopRepository'),
+  AddFavouriteShopUsecase: Symbol('AddFavouriteShopUsecase'),
+  ListFavouriteShopsUsecase: Symbol('ListFavouriteShopsUsecase'),
+  DeleteFavouriteShopUsecase: Symbol('DeleteFavouriteShopUsecase'),
+  CheckIsShopFavouriteUsecase: Symbol('CheckIsShopFavouriteUsecase')
 };

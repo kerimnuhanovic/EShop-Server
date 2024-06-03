@@ -20,7 +20,10 @@ router.post('/', async (req: Request<{}, {}, AuthRequest>, res: Response) => {
     return res.status(401).json(invalidCredentials);
   }
   const token = createTokenUsecase.invoke(user.username, user.userType, user.profileImage);
-  res.json(token);
+  res.json({
+    accessToken: token.accessToken,
+    userType: user.userType
+  });
 });
 
 export default router;
