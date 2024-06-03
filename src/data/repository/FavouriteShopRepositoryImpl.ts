@@ -31,7 +31,7 @@ export class FavouriteShopRepositoryImpl implements FavouriteShopRepository {
         try {
             const favouriteShops = await this.favouriteShopDao.listFavouriteShops(userId);
             const shopDocuments = await Promise.all(
-                favouriteShops.map((favShopDocument) => this.shopDao.getShopById(favShopDocument.id))
+                favouriteShops.map((favShopDocument) => this.shopDao.getShopById(favShopDocument.shopId))
             )
             return success(shopDocuments.map((shopDocument) => userDocumentToShop(shopDocument!)))
         } catch (error) {
