@@ -62,6 +62,8 @@ import { AddFavouriteShopUsecase } from '@src/domain/usecase/AddFavouriteShopUse
 import { ListFavouriteShopsUsecase } from '@src/domain/usecase/ListFavouriteShopsUsecase';
 import { DeleteFavouriteShopUsecase } from '@src/domain/usecase/DeleteFavouriteShopUsecase';
 import { CheckIsShopFavouriteUsecase } from '@src/domain/usecase/CheckIsShopFavouriteUsecase';
+import { ListShopOrdersUsecase } from '@src/domain/usecase/ListShopOrdersUsecase';
+import { UpdateOrderStatusUsecase } from '@src/domain/usecase/UpdateOrderStatusUsecase';
 
 const container = new Container();
 container.bind<DatabaseAceessRepository>(TYPES.DatabaseAccessRepository).to(DatabaseAceessRepositoryImpl);
@@ -115,5 +117,7 @@ container.bind<AddFavouriteShopUsecase>(TYPES.AddFavouriteShopUsecase).to(AddFav
 container.bind<ListFavouriteShopsUsecase>(TYPES.ListFavouriteShopsUsecase).to(ListFavouriteShopsUsecase)
 container.bind<DeleteFavouriteShopUsecase>(TYPES.DeleteFavouriteShopUsecase).to(DeleteFavouriteShopUsecase)
 container.bind<CheckIsShopFavouriteUsecase>(TYPES.CheckIsShopFavouriteUsecase).to(CheckIsShopFavouriteUsecase)
+container.bind<ListShopOrdersUsecase>(TYPES.ListShopOrdersUsecase).to(ListShopOrdersUsecase)
+container.bind<UpdateOrderStatusUsecase>(TYPES.UpdateOrderStatusUsecase).to(UpdateOrderStatusUsecase)
 
 export { container };
