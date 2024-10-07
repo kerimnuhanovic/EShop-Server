@@ -8,6 +8,7 @@ export class Shop {
     userType: string;
     shopCategories: string[];
     shopLocations: string[];
+    rating: number;
     constructor(
       id: string,
       name: string,
@@ -17,7 +18,8 @@ export class Shop {
       profileImage: string,
       userType: string,
       shopCategories: string[],
-      shopLocations: string[]
+      shopLocations: string[],
+      rating: number
     ) {
       this.id = id;
       this.name = name;
@@ -28,6 +30,7 @@ export class Shop {
       this.userType = userType;
       this.shopCategories = shopCategories;
       this.shopLocations = shopLocations;
+      this.rating = rating
     }
   }
   

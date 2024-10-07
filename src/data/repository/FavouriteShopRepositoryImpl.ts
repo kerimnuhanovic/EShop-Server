@@ -33,7 +33,10 @@ export class FavouriteShopRepositoryImpl implements FavouriteShopRepository {
             const shopDocuments = await Promise.all(
                 favouriteShops.map((favShopDocument) => this.shopDao.getShopById(favShopDocument.shopId))
             )
-            return success(shopDocuments.map((shopDocument) => userDocumentToShop(shopDocument!)))
+            const ratings = await Promise.all(
+                shopDocuments.map((shopDocument) => this.shopDao.getShopRating(shopDocument!.username))
+            )
+            return success(shopDocuments.map((shopDocument, index) => userDocumentToShop(shopDocument!, ratings[index])))
         } catch (error) {
             if (error instanceof MongoError) {
                 return handleMongoError(error);

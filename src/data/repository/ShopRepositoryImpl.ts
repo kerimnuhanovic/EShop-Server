@@ -35,7 +35,11 @@ export class ShopRepositoryImpl implements ShopRepository {
       try {
           const result = await this.shopDao.getAllShops(offset, searchQuery, filteredCategories, sortBy, orderBy)
           if (result) {
-            const shops = result.map((shopDocument) => userDocumentToShop(shopDocument))
+            const ratings = await Promise.all(
+              result.map((shopDocument) => this.shopDao.getShopRating(shopDocument.username))
+            )
+            const shops = result.map((shopDocument, index) => userDocumentToShop(shopDocument, ratings[index]))
+            
             return success(shops)
           }
           return failure(serverError, 500)
@@ -51,7 +55,10 @@ export class ShopRepositoryImpl implements ShopRepository {
       try {
         const result = await this.shopDao.getPopularShops()
         if (result) {
-          const shops = result.map((shopDocument) => userDocumentToShop(shopDocument))
+          const ratings = await Promise.all(
+            result.map((shopDocument) => this.shopDao.getShopRating(shopDocument.username))
+          )
+          const shops = result.map((shopDocument, index) => userDocumentToShop(shopDocument, ratings[index]))
           return success(shops)
         }
         return failure(serverError, 500)

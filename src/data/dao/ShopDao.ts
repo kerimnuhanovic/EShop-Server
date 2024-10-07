@@ -12,6 +12,7 @@ export interface ShopDao {
     getShopProducts(shopId: string): Promise<ProductDocument[]>
     getShopReviews(shopId: string): Promise<ReviewDocument[]>
     addShopReview(shopId: string, authorId: string, authorProfileImage: string, comment: string, rating: string): Promise<ReviewDocument>
+    getShopRating(shopId: string): Promise<number>
 }
 
 @injectable()
@@ -41,7 +42,7 @@ export class ShopDaoImpl implements ShopDao {
                         $elemMatch: { $in: filteredCategories }
                     }} : {}
                 ]
-            }).skip(offset).limit(5).sort([[sortBy ? sortBy : "username", orderBy === OrderBy.ASC ? 1 : -1]])
+            }).skip(offset).limit(6).sort([[sortBy ? sortBy : "username", orderBy === OrderBy.ASC ? 1 : -1]])
             return shops;
           } catch (e) {
             throw e;
@@ -51,7 +52,7 @@ export class ShopDaoImpl implements ShopDao {
     async getPopularShops(): Promise<UserDocument[]> {
         try {
             // Update this to retrieve most popular shops once reviews are implemented
-            const shops = await UserEntity.find({}) 
+            const shops = await UserEntity.find({userType: "Shop"}) 
             return shops;   
         } catch (e) {
             throw e;
@@ -89,5 +90,17 @@ export class ShopDaoImpl implements ShopDao {
             rating: rating
         })
         return await review.save()
+    }
+
+    async getShopRating(shopId: string): Promise<number> {
+        const shopReviews = await ReviewEntity.find({
+            shopId: shopId
+        })
+        const result = shopReviews.reduce((sum, item) => sum + item.rating, 0);
+        if (result !== 0) {
+            return parseFloat((result / shopReviews.length).toFixed(2));
+        } else {
+            return result;
+        }
     }
 }

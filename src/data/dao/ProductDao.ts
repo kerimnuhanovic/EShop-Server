@@ -64,7 +64,7 @@ export class ProductDaoImpl implements ProductDao {
           ]
           
         }
-        ).skip(offset).limit(5).sort([[sortBy ? sortBy : "title", orderBy === OrderBy.ASC ? 1 : -1]])
+        ).skip(offset).limit(6).sort([[sortBy ? sortBy : "title", orderBy === OrderBy.ASC ? 1 : -1]])
       return products;``
     } catch (e) {
       throw e;
