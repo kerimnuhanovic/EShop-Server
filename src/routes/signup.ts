@@ -30,7 +30,9 @@ router.post('/', upload.single('profileImage'), async (req, res) => {
       const token = createTokenUsecase.invoke(result.data.username, result.data.userType, profileImage);
       return res.json({
         accessToken: token.accessToken,
-        userType: result.data.userType
+        userType: result.data.userType,
+        username: req.body.username,
+        profileImage: profileImage
       });
     case 'failure':
       storeImageRepository.deleteImages([profileImage]);

@@ -22,7 +22,9 @@ router.post('/', async (req: Request<{}, {}, AuthRequest>, res: Response) => {
   const token = createTokenUsecase.invoke(user.username, user.userType, user.profileImage);
   res.json({
     accessToken: token.accessToken,
-    userType: user.userType
+    userType: user.userType,
+    profileImage: user.profileImage,
+    username: user.username
   });
 });
 
